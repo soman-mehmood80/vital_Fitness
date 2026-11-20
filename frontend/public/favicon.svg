@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#18181b" />
+      <stop offset="100%" stop-color="#09090b" />
+    </linearGradient>
+    <linearGradient id="heartGrad" x1="16" y1="16" x2="48" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ff5a5a" />
+      <stop offset="55%" stop-color="#ef4444" />
+      <stop offset="100%" stop-color="#b91c1c" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ef4444" stop-opacity="0.28" />
+      <stop offset="100%" stop-color="#ef4444" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Dark Squircle Badge -->
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#bgGrad)" stroke="#ef4444" stroke-opacity="0.45" stroke-width="2" />
+
+  <!-- Subtle Crimson Ambient Glow -->
+  <circle cx="32" cy="32" r="24" fill="url(#glow)" />
+
+  <!-- VitalFit Heart -->
+  <path
+    d="M32 49C32 49 14.5 38.2 14.5 26.8C14.5 21.1 19 16.5 24.6 16.5C28.1 16.5 30.8 18.3 32 20.6C33.2 18.3 35.9 16.5 39.4 16.5C45 16.5 49.5 21.1 49.5 26.8C49.5 38.2 32 49 32 49Z"
+    fill="url(#heartGrad)"
+  />
+
+  <!-- Crisp Heartbeat Pulse Line -->
+  <path
+    d="M19.5 31.5H25L28 24.5L32 37.5L35.8 27.5L38.5 31.5H44.5"
+    stroke="#ffffff"
+    stroke-width="2.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

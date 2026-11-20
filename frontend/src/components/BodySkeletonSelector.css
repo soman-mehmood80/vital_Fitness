@@ -1,0 +1,394 @@
+/* ===== INTERACTIVE BODY SKELETON WORKOUT CARD ===== */
+.body-skeleton-card {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.skeleton-topbar {
+    align-items: flex-start;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.skeleton-subtitle {
+    font-size: 12.5px;
+    color: var(--text-muted, #a1a1aa);
+    margin-top: 2px;
+}
+
+.skeleton-view-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.skeleton-flip-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+    background: var(--bg-elevated, rgba(255, 255, 255, 0.04));
+    color: var(--text-main, #fafafa);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.skeleton-flip-btn:hover {
+    border-color: rgba(239, 68, 68, 0.45);
+    color: #ef4444;
+}
+
+.skeleton-layout {
+    display: grid;
+    grid-template-columns: 330px 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.skeleton-stage {
+    background: var(--bg-elevated, rgba(255, 255, 255, 0.025));
+    border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.07));
+    border-radius: 18px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.skeleton-hover-pill {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.22);
+    font-size: 12px;
+}
+
+.skeleton-hover-pill span {
+    color: var(--text-muted, #a1a1aa);
+}
+
+.skeleton-hover-pill strong {
+    color: #ef4444;
+    font-weight: 700;
+}
+
+.skeleton-svg {
+    width: 100%;
+    max-width: 215px;
+    height: auto;
+    overflow: visible;
+    user-select: none;
+}
+
+.skeleton-base-silhouette {
+    fill: rgba(148, 163, 184, 0.14);
+    stroke: rgba(148, 163, 184, 0.28);
+    stroke-width: 1.4;
+}
+
+.skeleton-bone-guides {
+    fill: rgba(226, 232, 240, 0.35);
+    stroke: rgba(226, 232, 240, 0.22);
+    stroke-width: 1.2;
+    pointer-events: none;
+}
+
+.skeleton-muscle {
+    fill: rgba(239, 68, 68, 0.2);
+    stroke: rgba(239, 68, 68, 0.55);
+    stroke-width: 1.2;
+    cursor: pointer;
+    transition: fill 0.18s ease, stroke 0.18s ease;
+}
+
+.skeleton-muscle.hovered,
+.skeleton-muscle:hover {
+    fill: rgba(239, 68, 68, 0.55);
+    stroke: #f87171;
+    stroke-width: 1.7;
+}
+
+.skeleton-muscle.selected {
+    fill: rgba(239, 68, 68, 0.85);
+    stroke: #ffffff;
+    stroke-width: 1.8;
+    filter: url(#muscleGlow);
+}
+
+.skeleton-quick-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+}
+
+.skeleton-chip {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.09));
+    background: transparent;
+    color: var(--text-muted, #a1a1aa);
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+.skeleton-chip:hover {
+    color: var(--text-main, #fafafa);
+    border-color: rgba(239, 68, 68, 0.45);
+}
+
+.skeleton-chip.active {
+    background: rgba(239, 68, 68, 0.16);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.skeleton-details-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.skeleton-selected-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.skeleton-anatomy-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: #ef4444;
+    margin-bottom: 4px;
+}
+
+.skeleton-selected-header h4 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text-main, #fafafa);
+}
+
+.skeleton-selected-header p {
+    font-size: 13px;
+    color: var(--text-muted, #a1a1aa);
+    margin: 4px 0 0;
+}
+
+.skeleton-est-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.skeleton-est-badges span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 11px;
+    border-radius: 999px;
+    background: var(--bg-elevated, rgba(255, 255, 255, 0.05));
+    border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.skeleton-exercise-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.skeleton-ex-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+    background: var(--bg-elevated, rgba(255, 255, 255, 0.03));
+    color: var(--text-main, #fafafa);
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+.skeleton-ex-row:hover {
+    border-color: rgba(239, 68, 68, 0.45);
+    transform: translateY(-1px);
+}
+
+.skeleton-ex-row.selected {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: #ef4444;
+}
+
+.skeleton-ex-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.skeleton-ex-check {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(239, 68, 68, 0.14);
+    color: #ef4444;
+}
+
+.skeleton-ex-row.selected .skeleton-ex-check {
+    background: #ef4444;
+    color: #fff;
+}
+
+.skeleton-ex-left strong {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.skeleton-ex-left small {
+    font-size: 12px;
+    color: var(--text-muted, #a1a1aa);
+}
+
+.skeleton-ex-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-muted, #a1a1aa);
+    white-space: nowrap;
+}
+
+.skeleton-actions-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 4px;
+}
+
+.skeleton-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.skeleton-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.skeleton-btn.primary {
+    background: #ef4444;
+    color: #ffffff;
+}
+
+.skeleton-btn.primary:hover:not(:disabled) {
+    background: #dc2626;
+}
+
+.skeleton-btn.secondary {
+    background: rgba(34, 197, 94, 0.14);
+    border-color: rgba(34, 197, 94, 0.35);
+    color: #22c55e;
+}
+
+.skeleton-btn.ai {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.35);
+    color: #ef4444;
+}
+
+.skeleton-btn.ghost {
+    background: var(--bg-elevated, rgba(255, 255, 255, 0.05));
+    border-color: var(--border-subtle, rgba(255, 255, 255, 0.09));
+    color: var(--text-main, #fafafa);
+}
+
+.skeleton-ai-plan-box {
+    margin-top: 4px;
+    border-radius: 14px;
+    padding: 14px 16px;
+    background: var(--bg-elevated, rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.skeleton-ai-plan-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.skeleton-ai-plan-head span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.skeleton-ai-plan-head button {
+    background: transparent;
+    border: none;
+    color: var(--text-muted, #a1a1aa);
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.skeleton-ai-plan-text {
+    margin: 0;
+    white-space: pre-wrap;
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--text-main, #fafafa);
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+@media (max-width: 960px) {
+    .skeleton-layout {
+        grid-template-columns: 1fr;
+    }
+    .skeleton-exercise-list {
+        grid-template-columns: 1fr;
+    }
+}
