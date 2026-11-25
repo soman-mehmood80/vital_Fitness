@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 
 const express = require("express");
@@ -5,6 +6,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 
 const connectDB = require("./config/db");
+
 const authRoutes = require("./Routes/authRoutes");
 const workoutRoutes = require("./Routes/workoutRoutes");
 const workoutLogRoutes = require("./Routes/workoutLogRoutes");
@@ -21,12 +23,12 @@ const sleepRoutes = require("./Routes/sleepRoutes");
 const stepRoutes = require("./Routes/stepRoutes");
 const notificationRoutes = require("./Routes/notificationRoutes");
 
-
-
+// Environment validation
 if (!process.env.SECRET_KEY || process.env.SECRET_KEY.length < 32) {
     console.error("SECRET_KEY missing or too short (min 32 chars)");
     process.exit(1);
 }
+
 if (!process.env.MONGO_URI) {
     console.error("MONGO_URI missing");
     process.exit(1);
@@ -34,19 +36,51 @@ if (!process.env.MONGO_URI) {
 
 const app = express();
 
-// If behind nginx / Render / Heroku, enable this so rate-limit uses real IP.
-// Comment out if running directly without a proxy.
 app.set("trust proxy", 1);
 
-app.use(helmet());
+// Allowed frontend origins
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://vital-fitness-aio8.vercel.app",
+    ...(process.env.FRONTEND_URL
+        ? process.env.FRONTEND_URL.split(",").map(url => url.trim())
+        : [])
+];
 
+// CORS Configuration
 app.use(cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173"
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+
+        console.error("Blocked CORS Origin:", origin);
+        return callback(new Error("Not allowed by CORS"));
+    },
+    methods: [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE",
+        "OPTIONS"
+    ],
+    allowedHeaders: [
+        "Content-Type",
+        "Authorization"
+    ],
+    credentials: true,
+    optionsSuccessStatus: 204
 }));
 
+// Security
+app.use(helmet());
+
+// Body parsing
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true }));
 
+// Home Route
 app.get("/", (req, res) => {
     res.status(200).json({
         success: true,
@@ -54,7 +88,7 @@ app.get("/", (req, res) => {
     });
 });
 
-
+// API Routes
 app.use("/auth", authRoutes);
 app.use("/api/workouts", workoutRoutes);
 app.use("/api/workout-logs", workoutLogRoutes);
@@ -71,12 +105,7 @@ app.use("/api/sleep", sleepRoutes);
 app.use("/api/steps", stepRoutes);
 app.use("/api/notifications", notificationRoutes);
 
-
-
-
-
-
-// 404
+// 404 Handler
 app.use((req, res) => {
     res.status(404).json({
         success: false,
@@ -84,15 +113,17 @@ app.use((req, res) => {
     });
 });
 
-// Global error handler (multer / multer-storage-cloudinary errors land here)
+// Global Error Handler
 app.use((err, req, res, next) => {
     console.error("Unhandled error:", err);
+
     res.status(err.status || 500).json({
         success: false,
         message: err.message || "Internal server error"
     });
 });
 
+// Server
 const PORT = process.env.PORT || 3000;
 
 const startServer = async () => {
@@ -101,7 +132,7 @@ const startServer = async () => {
 
         app.listen(PORT, () => {
             console.log(`VitalFit Server Running on Port ${PORT}`);
-            console.log(`API URL: http://localhost:${PORT}`);
+            console.log(`Allowed Origins:`, allowedOrigins);
         });
 
     } catch (error) {
